@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://getbootstrap.com/docs/3.3/dist/css/bootstrap.min.css">
+	<style>
+	input[type=file] {
+		width: 1px;
+		height: 1px;
+		opacity: 0;
+		overflow: hidden;
+		position: absolute;
+		z-index: -1;
+	}
+		.file-lable {
+			cursor: pointer;
+		}
+		.label-imgage {
+			font-size: 30px;
+		}
+		#theImgage,
+		output img{
+			width: 200px;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="container text-center">
+		<input type="file" id="photoInput" >
+		<label for="photoInput" class="file-lable ">
+			<div class="label-imgage glyphicon-upload"></div>
+			<div class="label-text">Выбрать файлом</div>
+		</label>
+		<div>
+			<img src="" alt="" class="imgage-circle" id="theImgage">
+		</div>
+
+
+		<input type="file" id="files" name="files[]" multiple />
+		<label for="files" class="file-lable ">
+			<div class="label-imgage glyphicon-upload"></div>
+			<div class="label-text">Выбрать несколько файлов</div>
+		</label>
+		<output id="list"></output>
+	</div>
+
+	<script>
+
+		var fileReading = new FileReader();
+
+        fileReading.addEventListener('load', function () {
+            theImgage.src = this.result;
+        })
+        photoInput.addEventListener('change', function (e) {
+			var file = e.target.files[0];
+
+			if(file.size > (512 * 1024))
+			    alert('Файл больше 512 Кб');
+			else
+				fileReading.readAsDataURL(file);
+        })
+
+        function handleFileSelect(evt) {
+            var files = evt.target.files;
+
+            for (var i = 0, f; f = files[i]; i++) {
+
+                if (!f.type.match('image.*')) {
+                    continue;
+                }
+
+                var reader = new FileReader();
+
+                reader.onload = (function(theFile) {
+                    return function(e) {
+                        // Render thumbnail.
+                        var span = document.createElement('span');
+                        span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                            '" title="', escape(theFile.name), '"/>'].join('');
+                        document.getElementById('list').insertBefore(span, null);
+                    };
+                })(f);
+
+                reader.readAsDataURL(f);
+            }
+        }
+        document.getElementById('files').addEventListener('change', handleFileSelect, false);
+	</script>
+</body>
+</html>

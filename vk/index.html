@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>vk friend list</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <script src="http://vk.com/js/api/openapi.js" type="text/javascript"></script>
+    <script src="index.js" type="text/javascript"></script>
+</head>
+<body>
+    <main>
+        <h1>Выберите друзей</h1>
+        <div class="body">
+            <div id="leftColumn">
+                <div class="searchBlock">
+                    <label>
+                        <span>
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </span><input id="leftSearchInput" placeholder="Начните вводить имя друга">
+                    </label>
+                </div>
+
+                <div class="listWrapper">
+                    <p>Ваши друзья</p>
+                    <ul id="leftFriendList" class="friendList"></ul>
+                </div>
+            </div>
+            <div id="rightColumn">
+                <div class="searchBlock">
+                    <label>
+                        <span>
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </span><input id="rightSearchInput" placeholder="Начните вводить имя друга">
+                    </label>
+                </div>
+
+                <div class="listWrapper">
+                    <p>Друзья в списке</p>
+                    <ul id="rightFriendList" class="friendList"></ul>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="footer">
+            <button id="saveButton">Сохранить</button>
+            <div class="clear"></div>
+        </div>
+    </main>
+</body>
+</html>

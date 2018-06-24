@@ -1,0 +1,170 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    list-style: none;
+}
+
+html, body {
+    position: relative;
+    height: 100%;
+    background: #9f9f9f;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+
+main {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    width: 800px;
+    height: 700px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+}
+
+h1 {
+    background: #f5856e;
+    color: #fff;
+    font-size: 22px;
+    padding: 7px 15px;
+}
+
+.body {
+    height: 601px;
+}
+
+#leftColumn {
+    width: 50%;
+    float: left;
+}
+
+#rightColumn {
+    width: 50%;
+    float: right;
+}
+
+.clear {
+    clear: both;
+}
+
+.searchBlock {
+    background: #f1f1f1;
+    padding: 8px 10px;
+}
+
+.searchBlock span {
+    display: inline-block;
+    vertical-align: top;
+    height: 26px;
+    padding: 0 10px;
+    border-top-left-radius: 13px;
+    border-bottom-left-radius: 13px;
+    background: #fff;
+    color: #bbb;
+}
+
+.searchBlock span i {
+    margin-top: 4px;
+}
+
+.searchBlock input {
+    border: none;
+    height: 26px;
+    width: 330px;
+    border-top-right-radius: 13px;
+    border-bottom-right-radius: 13px;
+}
+
+.listWrapper {
+    padding: 15px 15px 0;
+}
+
+.listWrapper p {
+    font-weight: bold;
+}
+
+.friendList {
+    position: relative;
+    margin-top: 10px;
+    height: 516px;
+    overflow-y: scroll;
+}
+
+.friendList li {
+    position: relative;
+    padding: 10px 5px;
+    width: 345px;
+    border-bottom: solid 1px #f1f1f1;
+}
+
+.friendList li:first-child {
+    border-top: solid 1px #f1f1f1;
+}
+
+.friendList li:hover {
+    background: #f1f1f1;
+}
+
+.friendList img {
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.friendList .friendName {
+    display: inline-block;
+    margin-left: 5px;
+    vertical-align: middle;
+    font-weight: bold;
+}
+
+.friendList .actionButton {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    margin-top: -13px;
+    font-size: 25px;
+    color: #7f7f7f;
+}
+
+.friendList .actionButton:hover {
+    cursor: pointer;
+    color: #555;
+}
+
+.footer {
+    padding: 10px;
+    background: #f1f1f1;
+}
+
+#saveButton {
+    width: 100px;
+    height: 36px;
+    background: #f5856e;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    float: right;
+}
+
+#saveButton:hover {
+    cursor: pointer;
+}
+
+#saveButton:active {
+    background: #d67c65;
+}
+
+#saveButton:focus{
+    outline: none;
+}
+
+#saveButton::-moz-focus-inner{
+    border: none;
+}

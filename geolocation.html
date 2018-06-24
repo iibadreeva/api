@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://getbootstrap.com/docs/3.3/dist/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container ">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3>
+					Мое местоположение:
+				</h3>
+			</div>
+			<ul class="list-group" id="messageContainer"></ul>
+		</div>
+		<div class="row">
+			<button class="btn btn-default" id="locate">определить</button>
+			<button class="btn btn-default" id="watch">отслеживать</button>
+			<button class="btn btn-default" id="unwatch">отменить отслеживание</button>
+		</div>
+	</div>
+
+	<script>
+		var watchId;
+        var options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+        };
+
+        function error(err) {
+            alert('Невозможно определить местоположение')
+//            console.log('ERROR(' + err.code + '): ' + err.message);
+        }
+
+		function addLocation(geopos) {
+			var messageItem = document.createElement('li');
+
+			messageItem.className = 'list-group-item';
+			messageItem.textContent = `Широта: ${geopos.coords.latitude} Долгота: ${geopos.coords.longitude}; Точность: ${geopos.coords.accuracy}`;
+
+            messageContainer.appendChild(messageItem);
+            messageContainer.scrollTop = messageContainer.scrollHeight - messageContainer.clientHeight;
+        }
+
+        locate.addEventListener('click', function () {
+			navigator.geolocation.getCurrentPosition(addLocation, error)
+//            navigator.geolocation.getCurrentPosition(addLocation, error, options);
+        })
+
+		watch.addEventListener('click', function () {
+			if(!watchId){
+			    watchId = navigator.geolocation.watchPosition(addLocation, function () {
+                    alert('Невозможно определить местоположение')
+                })
+			}
+        })
+        unwatch.addEventListener('click', function () {
+			navigator.geolocation.clearWatch(watchId)
+            watchId = null;
+        })
+	</script>
+</body>
+</html>

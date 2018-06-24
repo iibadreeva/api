@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://getbootstrap.com/docs/3.3/dist/css/bootstrap.min.css">
+</head>
+<body>
+	<div>Цвет фона: <input type="text" id="bgColor" data-rule="backgroundColor" value="#fff"></div>
+	<div>Цвет текста: <input type="text" id="fColor" data-rule="color" value="#000"></div>
+	<div>Размер шрифта: <input type="text" id="fSize" data-rule="fontSize" value="16px"></div>
+	<button id="button">Запомнить</button>
+	<div id="content">
+		<div>Twitter Bootstrap становится всё популярнее и популярнее, многие используют его в своих проектах, думаю еще больше людей используют для прототипирования интерфейсов. Я не исключение. И вот сегодня утром наткнулся на интересный сервис — LayoutIt. По сути LayoutIt — это онлайн редактор для создания интерфейсов с использованием Bootstrap. Редактор представляет собой Drag & Drop интерфейс.</div>
+		<div>Давайте рассмотрим его подробнее. Сразу хочется сказать, что проект еще находится в бете и не все компоненты и возможности Bootstrap можно использовать. Так например на вкладке JavaScript красуется Cooming soon… Так же в кнопочках нельзя проставить иконки.
+			Интерфейс редактора выглядит так</div>
+		<div>Справа мы видим вкладки с компонентами Bootstrap. Grid System — выбор одна колонка, две или три. Base CSS — основные элементы такие как кнопочки, списки, таблицы, формы и прочее. Components — различного рода дополнительные компоненты.
+			Дальше все, что вам это перетаскивать элементы, и выбирать их свойства. Выглядит это примерно так</div>
+		<div>После того, как вы закончите, вы можете с помощью верхнего меню посмотреть превью или же скачать в формате zip или html ваш код.</div>
+		<div>Редактор пока далек от идеала, не хватает многих компонентов, есть еще над чем работать. Но для быстрого наброска он подходит почти идеально.</div>
+	</div>
+	<script>
+        button.addEventListener('click', function () {
+			var url = '/vk/test.html/' + bgColor.value + '/' + fColor.value + '/' + fSize.value;
+
+			history.pushState({
+			    bgColor: bgColor.value,
+				fColor: fColor.value,
+				fSize: fSize.value
+			}, 'new state', url)
+        })
+
+		document.body.addEventListener('keyup', function (e) {
+			appLyStyles()
+        })
+		window.addEventListener('popstate', function (e) {
+			var state = e.state; // || defaults;
+
+            bgColor.value = state.bgColor;
+			fColor.value = state.fColor;
+			fSize.value = state.fSize;
+
+            appLyStyles()
+        })
+
+		function appLyStyles() {
+			content.style.backgroundColor = bgColor.value;
+			content.style.color = fColor.value;
+			content.style.fontSize = fSize.value;
+        }
+        appLyStyles();
+	</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://getbootstrap.com/docs/3.3/dist/css/bootstrap.min.css">
+	<style>
+		.list-group {
+			height: 300px;
+			overflow-y: scroll;
+		}
+
+		.btn {
+			width: 100%;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="container ">
+		<h1>Пример работы с WebSocket</h1>
+		<form action="" name="messages">
+			<div class="row">Имя: <input type="text" name="fname"></div>
+			<div class="row">Текст: <input type="text" name="msg"></div>
+			<div class="row"><input type="submit" value="Поехали"></div>
+		</form>
+		<div id="status"></div>
+	</div>
+
+	<script>
+        window.onload = function(){
+            var socket = new WebSocket("ws://localhost:8080");
+//            var socket = new WebSocket("ws://echo.websocket.org");
+            var status = document.querySelector("#status");
+			// откррытие соединения
+            socket.onopen = function() {
+                status.innerHTML = "cоединение установлено";
+            };
+			// закрытие соединения
+            socket.onclose = function(event) {
+                if (event.wasClean) {
+                    status.innerHTML = 'cоединение закрыто';
+                } else {
+                    status.innerHTML = 'соединения как-то закрыто';
+                }
+                status.innerHTML += '<br>код: ' + event.code + ' причина: ' + event.reason;
+            };
+			// получение данных
+            socket.onmessage = function(event) {
+                console.log(event)
+//                status.innerHTML = "пришли данные " + event.data;
+				let message = JSON.parse(event.data);
+                status.innerHTML += `<br>пришли данные: имя: <b> ${message.name}</b> текст: <b>${message.msg}</b>`
+            };
+			// ошибки
+            socket.onerror = function(event) {
+                status.innerHTML = "ошибка " + event.message;
+            };
+
+            //в рамках onload
+            document.forms["messages"].onsubmit = function(e){
+                e.preventDefault();
+                let message = {
+                    name:this.fname.value,
+                    msg: this.msg.value
+                }
+                socket.send(JSON.stringify(message));
+            }
+        }
+
+
+
+	</script>
+</body>
+</html>
